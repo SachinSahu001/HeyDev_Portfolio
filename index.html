@@ -1,640 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Han Nguyen - Portfolio</title>
-    
-    <!-- CSS Libraries -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- JS Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
-    <script src="https://unpkg.com/@barba/core"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
+    <title>Hey Developer - Backend Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <script src="https://unpkg.com/lottie-web@5.9.6/build/player/lottie.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="Img/1753030080367_cded6c7b7f36f5d264fa209f2e3a839b.avif">
+    <link rel="icon" type="image/png" sizes="32x32" href="Img/1753030080367_cded6c7b7f36f5d264fa209f2e3a839b.avif">
+    <link rel="icon" type="image/png" sizes="16x16" href="Img/1753030080367_cded6c7b7f36f5d264fa209f2e3a839b.avif">
+    <link rel="manifest" href="Img/1753030080367_cded6c7b7f36f5d264fa209f2e3a839b.avif">
+    <link rel="mask-icon" href="Img/1753030080367_cded6c7b7f36f5d264fa209f2e3a839b.avif" color="#00d26a">
+    <meta name="msapplication-TileColor" content="#00d26a">
+    <meta name="theme-color" content="#00d26a">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #4a5d42;
-            --secondary-color: #f4a261;
-            --accent-color: #e76f51;
-            --dark-color: #2a2a2a;
-            --light-color: #f5f1eb;
-            --text-dark: #333;
-            --text-light: #666;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            background: var(--light-color);
-            color: var(--text-dark);
-        }
-
-        .barba-container {
-            position: relative;
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 40px;
-            background: rgba(245, 241, 235, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo::before {
-            content: '◇';
-            color: var(--accent-color);
-            font-size: 20px;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-menu a:hover {
-            color: var(--accent-color);
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-
-        .contact-btn {
-            background: var(--secondary-color);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .contact-btn:hover {
-            background: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(231, 111, 81, 0.3);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #3a4a32 100%);
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            width: 100%;
-        }
-
-        .hero-text {
-            color: white;
-        }
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(4rem, 8vw, 8rem);
-            font-weight: 900;
-            line-height: 0.9;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(2rem, 4vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 30px;
-            opacity: 0.8;
-        }
-
-        .hero-description {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            max-width: 500px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .social-link {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 16px;
-            border-radius: 20px;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-        .hero-image {
-            position: relative;
-            height: 600px;
-            border-radius: 20px;
-            overflow: hidden;
-            background: var(--secondary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--secondary-color);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            animation: bounce 2s infinite;
-            z-index: 10;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        /* Floating Elements */
-        .floating-element {
-            position: absolute;
-            color: var(--secondary-color);
-            font-size: 24px;
-            opacity: 0.3;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-element:nth-child(1) {
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .floating-element:nth-child(2) {
-            top: 60%;
-            right: 10%;
-            animation-delay: 2s;
-        }
-
-        .floating-element:nth-child(3) {
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        /* About Section */
-        .about {
-            padding: 120px 40px;
-            background: var(--light-color);
-        }
-
-        .about-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 5vw, 5rem);
-            color: var(--dark-color);
-            margin-bottom: 30px;
-            line-height: 1.1;
-        }
-
-        .about-description {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--text-light);
-            margin-bottom: 40px;
-        }
-
-        .about-image {
-            position: relative;
-        }
-
-        .about-img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 20px;
-            background: var(--primary-color);
-        }
-
-        .info-card {
-            position: absolute;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .birth-card {
-            top: 20px;
-            right: 20px;
-            background: var(--secondary-color);
-            color: white;
-        }
-
-        .nationality-card {
-            bottom: 20px;
-            left: 20px;
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .linkedin-btn {
-            background: var(--accent-color);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .linkedin-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(231, 111, 81, 0.3);
-        }
-
-        /* Contact Section */
-        .contact {
-            background: var(--dark-color);
-            color: white;
-            padding: 80px 40px;
-            text-align: center;
-        }
-
-        .contact h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 5vw, 5rem);
-            margin-bottom: 20px;
-        }
-
-        .contact-info {
-            margin: 40px 0;
-        }
-
-        .contact-item {
-            margin: 10px 0;
-            font-size: 18px;
-        }
-
-        /* Resume Section */
-        .resume {
-            padding: 120px 40px;
-            background: var(--light-color);
-        }
-
-        .resume-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .resume-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(4rem, 6vw, 6rem);
-            text-align: center;
-            margin-bottom: 80px;
-            color: var(--dark-color);
-            position: relative;
-        }
-
-        .resume-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-        }
-
-        .resume-section {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding: 20px 0;
-            border-left: 3px solid var(--secondary-color);
-            padding-left: 30px;
-            margin-bottom: 30px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -8px;
-            top: 25px;
-            width: 14px;
-            height: 14px;
-            background: var(--accent-color);
-            border-radius: 50%;
-        }
-
-        .timeline-year {
-            background: var(--secondary-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 14px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .timeline-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--dark-color);
-            margin-bottom: 5px;
-        }
-
-        .timeline-subtitle {
-            color: var(--text-light);
-            margin-bottom: 10px;
-        }
-
-        .timeline-description {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .skill-category {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .skill-category h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
         }
 
         .skill-tag {
-            background: var(--light-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            color: var(--text-dark);
             transition: all 0.3s ease;
         }
 
         .skill-tag:hover {
-            background: var(--secondary-color);
-            color: white;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
-        .activities-section {
-            margin-top: 60px;
-            background: var(--primary-color);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-        }
-
-        .hobbies-section {
-            margin-top: 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .hobby-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px 20px;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(10px);
+        .project-card {
             transition: all 0.3s ease;
         }
 
-        .hobby-item:hover {
+        .project-card:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
-        .hobby-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: var(--secondary-color);
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #00D26A, #4FC3F7);
         }
 
-        /* Three.js Canvas */
-        #three-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
+        #server-animation {
             width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 20px;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .resume-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Loading Animation */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loader-text {
-            color: white;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        /* Page Transition */
-        .page-transition {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-color);
-            z-index: 9998;
-            transform: translateY(-100%);
+            height: 400px;
         }
     </style>
 </head>
-<body>
-    <!-- Loader -->
-    <div class="loader" id="loader">
-        <div class="loader-text">Han Nguyen</div>
-    </div>
 
-    <!-- Page Transition -->
-    <div class="page-transition" id="page-transition"></div>
+<body class="bg-[#0D1117] text-gray-100" x-data="{ 
+        activeSection: 'home',
+        mobileMenuOpen: false,
+        projectFilter: 'all',
+        contactForm: {
+            email: '',
+            subject: '',
+            message: ''
+        },
+        contactSubmitted: false
+    }" @scroll.window="
+        const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
+        const scrollPosition = window.scrollY + 100;
+        
+        sections.forEach(section => {
+            const element = document.getElementById(section);
+            if (element && scrollPosition >= element.offsetTop && scrollPosition < element.offsetTop + element.offsetHeight) {
+                activeSection = section;
+            }
+        });
+    ">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-[#0D1117]/90 backdrop-blur-md z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold gradient-text">Hey._.Developer</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" @click="activeSection = 'home'"
+                            :class="{'text-[#00D26A]': activeSection === 'home', 'text-gray-300 hover:text-white': activeSection !== 'home'}"
+                            class="px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" @click="activeSection = 'about'"
+                            :class="{'text-[#00D26A]': activeSection === 'about', 'text-gray-300 hover:text-white': activeSection !== 'about'}"
+                            class="px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#skills" @click="activeSection = 'skills'"
+                            :class="{'text-[#00D26A]': activeSection === 'skills', 'text-gray-300 hover:text-white': activeSection !== 'skills'}"
+                            class="px-3 py-2 rounded-md text-sm font-medium">Skills</a>
+                        <a href="#projects" @click="activeSection = 'projects'"
+                            :class="{'text-[#00D26A]': activeSection === 'projects', 'text-gray-300 hover:text-white': activeSection !== 'projects'}"
+                            class="px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                        <a href="#experience" @click="activeSection = 'experience'"
+                            :class="{'text-[#00D26A]': activeSection === 'experience', 'text-gray-300 hover:text-white': activeSection !== 'experience'}"
+                            class="px-3 py-2 rounded-md text-sm font-medium">Experience</a>
+                        <a href="#contact" @click="activeSection = 'contact'"
+                            :class="{'text-[#00D26A]': activeSection === 'contact', 'text-gray-300 hover:text-white': activeSection !== 'contact'}"
+                            class="px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen"
+                        class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-    <!-- Three.js Canvas -->
-    <canvas id="three-canvas"></canvas>
+        <!-- Mobile menu -->
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false"
+            class="md:hidden bg-[#0D1117] border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" @click="mobileMenuOpen = false; activeSection = 'home'"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Home</a>
+                <a href="#about" @click="mobileMenuOpen = false; activeSection = 'about'"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">About</a>
+                <a href="#skills" @click="mobileMenuOpen = false; activeSection = 'skills'"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Skills</a>
+                <a href="#projects" @click="mobileMenuOpen = false; activeSection = 'projects'"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Projects</a>
+                <a href="#experience" @click="mobileMenuOpen = false; activeSection = 'experience'"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Experience</a>
+                <a href="#contact" @click="mobileMenuOpen = false; activeSection = 'contact'"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Barba Container -->
-    <div data-barba="wrapper">
-        <div data-barba="container" data-barba-namespace="home">
-            <!-- Navigation -->
-            <nav class="navbar" id="navbar">
-                <div class="logo">Han Nguyen</div>
-                <ul class="nav-menu">
-                    <li><a href="#about">About me</a></li>
-                    <li><a href="#resume">Resume</a></li>
-                    <li><a href="#work">Work</a></li>
-                </ul>
-                <a href="#contact" class="contact-btn">Get in touch</a>
-            </nav>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+                        <span class="gradient-text">Hey, I'm Sachin Sahu</span><br>
+                        <span class="text-white">Backend Dev</span>
+                    </h1>
+                    <p class="text-xl text-gray-300">
+                        Crafting scalable APIs, automating systems, and building robust backend architectures.
+                    </p>
+                    <div class="flex space-x-4 pt-4">
+                        <a href="#projects"
+                            class="px-6 py-3 bg-[#00D26A] hover:bg-[#00b85d] text-white font-medium rounded-lg transition duration-300">
+                            Explore My Work
+                        </a>
+                        <a href="#"
+                            class="px-6 py-3 border border-[#00D26A] text-[#00D26A] hover:bg-[#00D26A]/10 font-medium rounded-lg transition duration-300">
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div id="server-animation" class="lottie-animation"
+                        data-animation-path="https://assets5.lottiefiles.com/packages/lf20_vybwn7df.json"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<<<<<<< HEAD
     <!-- About Section -->
     <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-[#161B22]">
         <div class="max-w-7xl mx-auto">
@@ -1229,561 +762,89 @@
                         <h3 class="text-lg font-medium text-white mt-3">Message Sent!</h3>
                         <p class="mt-2 text-sm text-gray-300">
                             Thanks for reaching out. I'll get back to you as soon as possible.
-=======
-            <!-- Hero Section -->
-            <section class="hero" id="hero">
-                <div class="floating-element">✦</div>
-                <div class="floating-element">◆</div>
-                <div class="floating-element">✧</div>
-                
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <h1 class="hero-title">PORTFOLIO</h1>
-                        <h2 class="hero-subtitle">FOLIO</h2>
-                        <p class="hero-description">
-                            I love design and anything related to art. 
-                            I approach every project in a rational and pragmatic 
-                            way and seek the simplest and most functional 
-                            solutions possible.
->>>>>>> b8055ab1b23c49e90ccbe229f5a091ef4cf28747
                         </p>
-                        <div class="social-links">
-                            <a href="#" class="social-link">BE: /hannb</a>
-                            <a href="#" class="social-link">IG: @han.nnb</a>
-                            <a href="#" class="social-link">LI: /han-nnb</a>
-                        </div>
-                    </div>
-                    <div class="hero-image">
-                        <img src="Img/1704642721870.jpg" alt="Han Nguyen" />
+                        <button @click="contactSubmitted = false; contactForm = { email: '', subject: '', message: '' }"
+                            class="mt-6 px-4 py-2 text-sm text-[#00D26A] hover:underline">
+                            Send another message
+                        </button>
                     </div>
                 </div>
-                
-                <div class="scroll-indicator" id="scroll-down">
-                    <i class="fas fa-arrow-down"></i>
-                    <span>Scroll down</span>
-                </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- About Section -->
-            <section class="about" id="about">
-                <div class="about-content">
-                    <div class="about-text">
-                        <h2>Hello,<br>I'm Han !</h2>
-                        <p class="about-description">
-                            I am a self-taught Graphic Designer based in Viet Nam with extensive marketing and 
-                            communication experience. I am currently living in France and pursuing a degree in 
-                            Digital Web & Project Management.
-                        </p>
-                        <a href="#" class="linkedin-btn">
-                            <i class="fab fa-linkedin"></i>
-                            linkedin.com/in/han-nnb
+    <!-- Footer -->
+    <footer class="bg-[#0D1117] border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold gradient-text">Hey._.Developer</span>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <p class="text-gray-400 text-sm">
+                        &copy; 2023 Hey Developer. All rights reserved.
+                    </p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <div class="flex space-x-6">
+                        <a href="https://github.com/SachinSahu001/" class="text-gray-400 hover:text-[#00D26A]">
+                            <span class="sr-only">GitHub</span>
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/sachin-sahu-010701353/"
+                            class="text-gray-400 hover:text-[#00D26A]">
+                            <span class="sr-only">LinkedIn</span>
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="https://x.com/heypersonaluser" class="text-gray-400 hover:text-[#00D26A]">
+                            <span class="sr-only">Twitter</span>
+                           <i class="fa-brands fa-x-twitter"></i>
                         </a>
                     </div>
-                    <div class="about-image">
-                        <img src="Img/1704642721870.jpg" alt="Han Nguyen" class="about-img" />
-                        <div class="info-card birth-card">2nd August 1999</div>
-                        <div class="info-card nationality-card">Vietnamese</div>
-                    </div>
                 </div>
-            </section>
-
-            <!-- Contact Section -->
-            <section class="contact" id="contact">
-                <h2>Contact</h2>
-                <div class="contact-info">
-                    <div class="contact-item">📍 Narbonne, France</div>
-                    <div class="contact-item">📧 nnbn428@gmail.com</div>
-                    <div class="contact-item">📱 07 82 84 59 00</div>
-                </div>
-            </section>
-
-            <!-- Resume Section -->
-            <section class="resume" id="resume">
-                <div class="resume-container">
-                    <h1 class="resume-title">RESUME</h1>
-                    
-                    <div class="resume-grid">
-                        <!-- Education -->
-                        <div class="resume-section">
-                            <h2 class="section-title">Education</h2>
-                            <div class="timeline-item">
-                                <div class="timeline-year">2022-2028</div>
-                                <div class="timeline-title">Digital Campus, Montpellier</div>
-                                <div class="timeline-subtitle">Digital Web & Project Management</div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-year">2021-2022</div>
-                                <div class="timeline-title">IUT de Béziers</div>
-                                <div class="timeline-subtitle">Communication Technique</div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-year">2017-2020</div>
-                                <div class="timeline-title">Economic University, Danang</div>
-                                <div class="timeline-subtitle">International Business</div>
-                            </div>
-                        </div>
-
-                        <!-- Experience -->
-                        <div class="resume-section">
-                            <h2 class="section-title">Experience</h2>
-                            <div class="timeline-item">
-                                <div class="timeline-year">2022</div>
-                                <div class="timeline-title">Marketing Intern</div>
-                                <div class="timeline-subtitle">Social media content creator at Ethnic, Narbonne, France</div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-year">2021</div>
-                                <div class="timeline-title">Freelancer</div>
-                                <div class="timeline-subtitle">Consulted with clients, created logos, posters, presentations based on their requirements</div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-year">2020</div>
-                                <div class="timeline-title">Graphic Designer</div>
-                                <div class="timeline-subtitle">Designed branded promotional materials for events Songhan Incubator, Viet Nam</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Technical Skills -->
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h3>Software Skills</h3>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Ps</span>
-                                <span class="skill-tag">Ai</span>
-                                <span class="skill-tag">Id</span>
-                                <span class="skill-tag">Xd</span>
-                                <span class="skill-tag">Pr</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h3>Design Skills</h3>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Packaging</span>
-                                <span class="skill-tag">Visual design</span>
-                                <span class="skill-tag">UI/UX design</span>
-                                <span class="skill-tag">User Research</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h3>Coding Skills</h3>
-                            <div class="skill-tags">
-                                <span class="skill-tag">HTML</span>
-                                <span class="skill-tag">CSS</span>
-                                <span class="skill-tag">JavaScript</span>
-                                <span class="skill-tag">PHP</span>
-                                <span class="skill-tag">SQL</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h3>Soft Skills</h3>
-                            <div class="skill-tags">
-                                <span class="skill-tag">#Creativity</span>
-                                <span class="skill-tag">#Communication</span>
-                                <span class="skill-tag">#Detail-oriented</span>
-                                <span class="skill-tag">#Adaptability</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Activities -->
-                    <div class="activities-section">
-                        <h2 class="section-title" style="color: white;">Activities</h2>
-                        <div class="timeline-item" style="border-left-color: white;">
-                            <div class="timeline-year">2020</div>
-                            <div class="timeline-title" style="color: white;">'Danang Tul' 2 exhibition</div>
-                            <div class="timeline-subtitle" style="color: rgba(255,255,255,0.8);">Artist of miniature art</div>
-                        </div>
-                        <div class="timeline-item" style="border-left-color: white;">
-                            <div class="timeline-year">2019</div>
-                            <div class="timeline-title" style="color: white;">Danang Robodnic contest</div>
-                            <div class="timeline-subtitle" style="color: rgba(255,255,255,0.8);">Volunteer designer and producer of promotional materials</div>
-                        </div>
-
-                        <!-- Languages -->
-                        <div style="margin-top: 40px;">
-                            <h3 style="color: white; font-size: 1.8rem; margin-bottom: 20px;">Language</h3>
-                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-                                <div style="text-align: center;">
-                                    <div style="font-weight: 600; color: white;">English</div>
-                                    <div style="color: rgba(255,255,255,0.8);">Fluent</div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="font-weight: 600; color: white;">French</div>
-                                    <div style="color: rgba(255,255,255,0.8);">Intermediate</div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="font-weight: 600; color: white;">Vietnamese</div>
-                                    <div style="color: rgba(255,255,255,0.8);">Native</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Hobbies -->
-                        <div style="margin-top: 40px;">
-                            <h3 style="color: white; font-size: 1.8rem; margin-bottom: 20px;">Hobbies & Interests</h3>
-                            <div class="hobbies-section">
-                                <div class="hobby-item">
-                                    <div class="hobby-icon">🎵</div>
-                                    <div>Classical Funky/Gypsy Jazz</div>
-                                </div>
-                                <div class="hobby-item">
-                                    <div class="hobby-icon">🧶</div>
-                                    <div>Crochet knitting</div>
-                                </div>
-                                <div class="hobby-item">
-                                    <div class="hobby-icon">🎨</div>
-                                    <div>Digital art Miniature craft</div>
-                                </div>
-                                <div class="hobby-item">
-                                    <div class="hobby-icon">🐾</div>
-                                    <div>Cat, cat and cat</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
         </div>
-    </div>
+    </footer>
 
     <script>
-        // GSAP Animations
-        gsap.registerPlugin(ScrollTrigger, TextPlugin);
-
-        // Three.js Background
-        let scene, camera, renderer, particles;
-
-        function initThree() {
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-            // Create particles
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 100;
-            const posArray = new Float32Array(particlesCount * 3);
-
-            for (let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 10;
-            }
-
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.005,
-                color: 0xf4a261,
-                transparent: true,
-                opacity: 0.3
-            });
-
-            particles = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particles);
-
-            camera.position.z = 5;
-
-            animate();
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            if (particles) {
-                particles.rotation.y += 0.001;
-                particles.rotation.x += 0.0005;
-            }
-
-            renderer.render(scene, camera);
-        }
-
-        // Window resize handler
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // Page Load Animation
-        window.addEventListener('load', () => {
-            // Hide loader
-            gsap.to('#loader', {
-                opacity: 0,
-                duration: 0.5,
-                delay: 1,
-                onComplete: () => {
-                    document.getElementById('loader').style.display = 'none';
-                }
-            });
-
-            // Hero animations
-            const tl = gsap.timeline({ delay: 1.5 });
-            
-            tl.from('.hero-title', {
-                y: 100,
-                opacity: 0,
-                duration: 1,
-                ease: 'power3.out'
-            })
-            .from('.hero-subtitle', {
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
-                ease: 'power3.out'
-            }, '-=0.5')
-            .from('.hero-description', {
-                y: 30,
-                opacity: 0,
-                duration: 0.6,
-                ease: 'power3.out'
-            }, '-=0.3')
-            .from('.social-links .social-link', {
-                y: 20,
-                opacity: 0,
-                duration: 0.5,
-                stagger: 0.1,
-                ease: 'power3.out'
-            }, '-=0.2')
-            .from('.hero-image', {
-                scale: 0.8,
-                opacity: 0,
-                duration: 1,
-                ease: 'power3.out'
-            }, '-=0.8')
-            .from('.floating-element', {
-                scale: 0,
-                opacity: 0,
-                duration: 0.6,
-                stagger: 0.2,
-                ease: 'back.out(1.7)'
-            }, '-=0.5');
-
-            // Navbar animation
-            gsap.from('.navbar', {
-                y: -100,
-                opacity: 0,
-                duration: 0.8,
-                delay: 2,
-                ease: 'power3.out'
-            });
-        });
-
-        // Scroll Triggered Animations
-        ScrollTrigger.batch('.timeline-item', {
-            onEnter: (elements) => {
-                gsap.from(elements, {
-                    x: -50,
-                    opacity: 0,
-                    duration: 0.8,
-                    stagger: 0.2,
-                    ease: 'power3.out'
+        // Initialize Lottie animation
+        document.addEventListener('DOMContentLoaded', function () {
+            const animationContainer = document.getElementById('server-animation');
+            if (animationContainer) {
+                const animation = lottie.loadAnimation({
+                    container: animationContainer,
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: animationContainer.getAttribute('data-animation-path')
                 });
             }
-        });
 
-        ScrollTrigger.batch('.skill-tag', {
-            onEnter: (elements) => {
-                gsap.from(elements, {
-                    scale: 0,
-                    opacity: 0,
-                    duration: 0.5,
-                    stagger: 0.05,
-                    ease: 'back.out(1.7)'
-                });
-            }
-        });
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
 
-        ScrollTrigger.batch('.hobby-item', {
-            onEnter: (elements) => {
-                gsap.from(elements, {
-                    y: 50,
-                    opacity: 0,
-                    duration: 0.6,
-                    stagger: 0.1,
-                    ease: 'power3.out'
-                });
-            }
-        });
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
 
-        // About section animation
-        gsap.timeline({
-            scrollTrigger: {
-                trigger: '.about',
-                start: 'top 70%',
-                end: 'bottom 30%',
-                toggleActions: 'play none none reverse'
-            }
-        })
-        .from('.about-text h2', {
-            x: -100,
-            opacity: 0,
-            duration: 1,
-            ease: 'power3.out'
-        })
-        .from('.about-description', {
-            y: 50,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power3.out'
-        }, '-=0.5')
-        .from('.linkedin-btn', {
-            scale: 0,
-            opacity: 0,
-            duration: 0.6,
-            ease: 'back.out(1.7)'
-        }, '-=0.3')
-        .from('.about-image', {
-            x: 100,
-            opacity: 0,
-            duration: 1,
-            ease: 'power3.out'
-        }, '-=0.8')
-        .from('.info-card', {
-            scale: 0,
-            opacity: 0,
-            duration: 0.6,
-            stagger: 0.2,
-            ease: 'back.out(1.7)'
-        }, '-=0.5');
-
-        // Smooth scrolling
-        document.getElementById('scroll-down').addEventListener('click', () => {
-            gsap.to(window, {
-                duration: 1.5,
-                scrollTo: '#about',
-                ease: 'power3.inOut'
-            });
-        });
-
-        // Navbar scroll effect
-        ScrollTrigger.create({
-            start: 'top -80',
-            end: 99999,
-            toggleClass: {
-                className: 'scrolled',
-                targets: '.navbar'
-            }
-        });
-
-        // Barba.js Page Transitions
-        barba.init({
-            transitions: [
-                {
-                    name: 'default-transition',
-                    leave(data) {
-                        return gsap.timeline()
-                            .to('#page-transition', {
-                                duration: 0.5,
-                                y: '0%',
-                                ease: 'power3.inOut'
-                            });
-                    },
-                    enter(data) {
-                        return gsap.timeline()
-                            .to('#page-transition', {
-                                duration: 0.5,
-                                y: '100%',
-                                ease: 'power3.inOut'
-                            });
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
                     }
-                }
-            ]
-        });
-
-        // Initialize Three.js
-        initThree();
-
-        // Mouse parallax effect
-        document.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-
-            gsap.to('.floating-element', {
-                x: (mouseX - 0.5) * 50,
-                y: (mouseY - 0.5) * 50,
-                duration: 1,
-                ease: 'power2.out',
-                stagger: 0.1
-            });
-
-            // Three.js camera movement
-            if (camera) {
-                gsap.to(camera.position, {
-                    x: (mouseX - 0.5) * 2,
-                    y: -(mouseY - 0.5) * 2,
-                    duration: 2,
-                    ease: 'power2.out'
                 });
-            }
-        });
-
-        // Skill tag hover effects
-        document.querySelectorAll('.skill-tag').forEach(tag => {
-            tag.addEventListener('mouseenter', () => {
-                gsap.to(tag, {
-                    scale: 1.1,
-                    duration: 0.3,
-                    ease: 'back.out(1.7)'
-                });
-            });
-
-            tag.addEventListener('mouseleave', () => {
-                gsap.to(tag, {
-                    scale: 1,
-                    duration: 0.3,
-                    ease: 'back.out(1.7)'
-                });
-            });
-        });
-
-        // Contact button animation
-        document.querySelectorAll('.contact-btn, .linkedin-btn').forEach(btn => {
-            btn.addEventListener('mouseenter', () => {
-                gsap.to(btn, {
-                    scale: 1.05,
-                    duration: 0.3,
-                    ease: 'back.out(1.7)'
-                });
-            });
-
-            btn.addEventListener('mouseleave', () => {
-                gsap.to(btn, {
-                    scale: 1,
-                    duration: 0.3,
-                    ease: 'back.out(1.7)'
-                });
-            });
-        });
-
-        // Text reveal animation for resume title
-        gsap.timeline({
-            scrollTrigger: {
-                trigger: '.resume-title',
-                start: 'top 80%',
-                end: 'bottom 20%',
-                toggleActions: 'play none none reverse'
-            }
-        })
-        .from('.resume-title', {
-            text: '',
-            duration: 2,
-            ease: 'none'
-        });
-
-        // Navbar link smooth scroll
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                if (target) {
-                    gsap.to(window, {
-                        duration: 1.5,
-                        scrollTo: target,
-                        ease: 'power3.inOut'
-                    });
-                }
             });
         });
     </script>
 </body>
+
 </html>
