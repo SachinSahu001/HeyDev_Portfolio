@@ -1,0 +1,33 @@
+# Ignore image folders
+/Portfolio Img/
+/images/
+/img/
+/assets/
+
+# Ignore PDF folder
+/pdf/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+
+# Environment files
+.env
+.env.local
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# OS generated files
+ehthumbs.db
+Desktop.ini

@@ -267,6 +267,34 @@
             transform: translateX(5px);
         }
 
+        .resume-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-resume {
+            background: white;
+            color: var(--primary-color);
+            padding: 12px 24px;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-resume:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
         .hero-visual {
             flex: 1;
             display: flex;
@@ -706,6 +734,10 @@
                 gap: 15px;
             }
 
+            .resume-buttons {
+                justify-content: center;
+            }
+
             .profile-image {
                 width: 280px;
                 height: 280px;
@@ -777,6 +809,11 @@
             .about-profile-image {
                 height: 300px;
             }
+
+            .resume-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
         /* Loading Animation */
@@ -847,6 +884,14 @@
                 <a href="#work" class="btn-primary">View My Work</a>
                 <a href="#about" class="btn-secondary">
                     Learn More →
+                </a>
+            </div>
+            <div class="resume-buttons">
+                <a href="./pdf/SachinSahu_InternshalaResume.pdf" download="SachinSahu_Resume.pdf" class="btn-resume">
+                    <i class="fas fa-download"></i> Download Resume
+                </a>
+                <a href="./pdf/SachinSahu_InternshalaResume.pdf" target="_blank" class="btn-resume">
+                    <i class="fas fa-eye"></i> View Resume
                 </a>
             </div>
         </div>
@@ -1106,7 +1151,7 @@
         animateFollower();
 
         // Cursor hover effects
-        const hoverElements = document.querySelectorAll('a, button, .project-card, .skill-tag, .profile-image, .about-profile-image');
+        const hoverElements = document.querySelectorAll('a, button, .project-card, .skill-tag, .profile-image, .about-profile-image, .btn-resume');
         
         hoverElements.forEach(element => {
             element.addEventListener('mouseenter', () => {
@@ -1185,6 +1230,12 @@
                     ease: "power2.out"
                 }, "-=0.6")
                 .to('.hero-cta', {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power2.out"
+                }, "-=0.4")
+                .to('.resume-buttons', {
                     opacity: 1,
                     y: 0,
                     duration: 0.8,
