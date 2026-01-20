@@ -1,11 +1,11 @@
-# Ignore image folders
-/Portfolio Img/
-/images/
-/img/
-/assets/
+# # Ignore image folders
+# /Portfolio Img/
+# /images/
+# /img/
+# /assets/
 
-# Ignore PDF folder
-/pdf/
+# # Ignore PDF folder
+# /pdf/
 
 # System files
 .DS_Store
